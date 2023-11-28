@@ -13,8 +13,11 @@ import org.springframework.security.web.access.intercept.AuthorizationFilter
 class SecurityConfig {
 
     @Bean
-    fun filterChain(http: HttpSecurity): SecurityFilterChain {
-        http.addFilterBefore(ApiKeyFilter(), AuthorizationFilter::class.java)
+    fun filterChain(
+        http: HttpSecurity,
+        apiKeyFilter: ApiKeyFilter
+    ): SecurityFilterChain {
+        http.addFilterBefore(apiKeyFilter, AuthorizationFilter::class.java)
 
         return http.build()
     }
